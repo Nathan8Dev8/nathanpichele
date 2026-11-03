@@ -28,4 +28,3 @@ Fichiers nécessaires : `index.html`, `styles.css`, `app.js`, `assets/`, `CV_Nat
 
 ## Crédits
 Modèle 3D « Laptop » par Aullwen (CC BY 4.0), crédité en pied de page : ne pas retirer.
-# nathanpichele

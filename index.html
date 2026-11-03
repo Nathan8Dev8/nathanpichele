@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nathan Pichele, développeur fullstack à Douala</title>
+<meta name="description" content="Nathan Pichele, développeur fullstack à Douala. Sites web, boutiques en ligne, applications métier et mobiles, agents IA et automatisation pour les PME et les grandes entreprises.">
+<meta property="og:title" content="Nathan Pichele, développeur fullstack à Douala">
+<meta property="og:description" content="Sites, applications et agents IA qui font gagner du temps et des clients aux entreprises. Douala, Cameroun.">
+<meta property="og:image" content="assets/img/nathan.webp">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#14131a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Ccircle cx=%2232%22 cy=%2232%22 r=%2232%22 fill=%22%236b3fc9%22/%3E%3Ctext x=%2232%22 y=%2242%22 font-size=%2226%22 font-family=%22Arial%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22%3ENP%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Préchargeur : nom + barre, puis rideau de lames -->
+<div id="loader" aria-hidden="true">
+  <p class="load-name">Nathan Pichele</p>
+  <div class="boot-bar"><i></i></div>
+  <div class="blades"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+</div>
+
+<canvas id="gl" aria-hidden="true"></canvas>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div id="cursor" aria-hidden="true"><i class="c-dot"></i><i class="c-ring"></i></div>
+<div id="progress" aria-hidden="true"></div>
+
+<header id="top" class="glass">
+  <a href="#hero" class="brand" aria-label="Accueil"><b>NP</b><span>Nathan Pichele</span></a>
+  <nav>
+    <a href="#about" data-i18n="nav.about">À propos</a>
+    <a href="#services" data-i18n="nav.services">Services</a>
+    <a href="#skills" data-i18n="nav.skills">Compétences</a>
+    <a href="#work" data-i18n="nav.work">Projets</a>
+    <a href="#path" data-i18n="nav.path">Parcours</a>
+  </nav>
+  <button class="lang" id="lang" aria-label="Changer de langue / Switch language"><span>FR</span><span>EN</span></button>
+  <a href="#contact" class="btn btn-sm magnetic" data-i18n="nav.cta">Me contacter</a>
+</header>
+
+<main>
+
+<!-- ============ HERO : l'ordinateur s'allume au scroll ============ -->
+<section id="hero" class="pin" data-pin="6">
+  <div class="sticky">
+    <div class="hero-glow"></div>
+
+    <div class="hero-title">
+      <p class="hero-place" data-i18n="hero.kicker">Développeur fullstack à Douala, Cameroun</p>
+      <h1>Nathan<br>Pichele</h1>
+      <p class="hero-sub" data-i18n="hero.sub">Je conçois les sites, les applications et les agents IA qui font gagner du temps et des clients aux entreprises. Du premier rendez-vous à la mise en ligne, vous avez un seul interlocuteur.</p>
+      <div class="hero-actions">
+        <a class="btn magnetic" href="#contact" data-i18n="hero.cta1">Discuter de votre projet</a>
+        <a class="btn btn-ghost magnetic" href="#work" data-i18n="hero.cta2">Voir mes réalisations</a>
+      </div>
+      <p class="scroll-hint" data-i18n="hero.scroll">Descendez, l'ordinateur va s'ouvrir ↓</p>
+    </div>
+
+    <div class="chapters" aria-live="polite">
+      <div class="chap"><em data-i18n="chap.n1">Étape 1 sur 4</em><b data-i18n="chap.1t">Vous avez une idée</b><span data-i18n="chap.1">Un besoin précis, un problème qui vous coûte du temps, ou l'envie de vendre en ligne. On en parle simplement, sans jargon.</span></div>
+      <div class="chap"><em data-i18n="chap.n2">Étape 2 sur 4</em><b data-i18n="chap.2t">On la cadre ensemble</b><span data-i18n="chap.2">Objectifs, budget, délais : je vous propose une solution claire et chiffrée avant d'écrire la moindre ligne de code.</span></div>
+      <div class="chap"><em data-i18n="chap.n3">Étape 3 sur 4</em><b data-i18n="chap.3t">Je la développe</b><span data-i18n="chap.3">Vous suivez l'avancement à chaque étape, avec une version de test en ligne que vous pouvez essayer.</span></div>
+      <div class="chap"><em data-i18n="chap.n4">Étape 4 sur 4</em><b data-i18n="chap.4t">Vous la lancez</b><span data-i18n="chap.4">Mise en ligne, prise en main par vos équipes et suivi après la livraison. Votre outil travaille pour vous.</span></div>
+    </div>
+    <ol class="rail" aria-hidden="true"><li></li><li></li><li></li><li></li></ol>
+
+    <div id="stage3d" aria-label="Ordinateur portable en 3D" role="img">
+        <div class="screen" id="screen">
+          <!-- couche 4 : l'application de devis qui se construit -->
+          <div class="app" id="app">
+            <div class="b a-nav" data-b="0"><b class="logo">◆ Devis<span>.en ligne</span></b><i>Tableau de bord</i><i class="on">Nouveau devis</i><i>Clients</i><i>Paramètres</i><span class="avatar">NP</span></div>
+            <div class="b a-head" data-b="1"><div><small>DEVIS N° D-2024-087</small><h3>Nouveau devis</h3></div><span class="pill">Brouillon</span></div>
+            <div class="b a-client" data-b="2">
+              <label>Client<span>Société Bantu SARL</span></label>
+              <label>E-mail<span>contact@bantu-sarl.cm</span></label>
+              <label>Date<span>12/09/2024</span></label>
+              <label>Validité<span>30 jours</span></label>
+            </div>
+            <div class="b a-table" data-b="3">
+              <div class="tr th"><span>Prestation</span><span>Qté</span><span>Prix unitaire</span><span>Total</span></div>
+              <div class="tr"><span>Développement site vitrine</span><span>1</span><span>450 000</span><span>450 000</span></div>
+              <div class="tr"><span>Hébergement (12 mois)</span><span>1</span><span>120 000</span><span>120 000</span></div>
+              <div class="tr"><span>Maintenance mensuelle</span><span>6</span><span>30 000</span><span>180 000</span></div>
+              <div class="tr add"><span>+ Ajouter une ligne</span></div>
+            </div>
+            <div class="b a-chart" data-b="4">
+              <small>Devis acceptés</small>
+              <div class="bars"><i style="--h:.45"></i><i style="--h:.6"></i><i style="--h:.4"></i><i style="--h:.75"></i><i style="--h:.65"></i><i style="--h:.9"></i></div>
+            </div>
+            <div class="b a-total" data-b="5">
+              <div><span>Total HT</span><b>750 000 FCFA</b></div>
+              <div><span>TVA 19,25 %</span><b>144 375 FCFA</b></div>
+              <div class="ttc"><span>Total TTC</span><b>894 375 FCFA</b></div>
+            </div>
+            <div class="b a-actions" data-b="6"><span class="ghost">Aperçu</span><span class="cta">Générer le PDF</span></div>
+            <div class="b a-toast" data-b="7">✓ Devis envoyé à Société Bantu SARL</div>
+          </div>
+          <!-- couche 3 : terminal -->
+          <div class="term">
+            <div class="term-win">
+              <div class="term-bar"><i></i><i></i><i></i><span>nathan@dev: ~/devis-en-ligne</span></div>
+              <pre id="typed"></pre>
+            </div>
+          </div>
+          <!-- couche 2 : allumage façon CRT -->
+          <div class="crt"></div>
+          <!-- couche 1 : écran éteint -->
+          <div class="off"></div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bande défilante -->
+<div class="band" aria-hidden="true"><div class="band-track"><span>Fullstack<i class="sep">&lt;/&gt;</i>Agents IA<i class="sep">&lt;/&gt;</i>Cloud<i class="sep">&lt;/&gt;</i>DevOps<i class="sep">&lt;/&gt;</i>Python<i class="sep">&lt;/&gt;</i>Django<i class="sep">&lt;/&gt;</i>Next.js<i class="sep">&lt;/&gt;</i>Flutter<i class="sep">&lt;/&gt;</i>Docker<i class="sep">&lt;/&gt;</i></span><span>Fullstack<i class="sep">&lt;/&gt;</i>Agents IA<i class="sep">&lt;/&gt;</i>Cloud<i class="sep">&lt;/&gt;</i>DevOps<i class="sep">&lt;/&gt;</i>Python<i class="sep">&lt;/&gt;</i>Django<i class="sep">&lt;/&gt;</i>Next.js<i class="sep">&lt;/&gt;</i>Flutter<i class="sep">&lt;/&gt;</i>Docker<i class="sep">&lt;/&gt;</i></span></div></div>
+
+<!-- ============ À PROPOS ============ -->
+<section id="about" class="section">
+  <div class="about-grid">
+    <figure class="portrait tilt glass">
+      <img src="assets/img/nathan.webp" alt="Portrait de Nathan Pichele" width="750" height="1038" loading="lazy">
+      <figcaption>Kuemo Pichele Nathan Cabrel</figcaption>
+    </figure>
+    <div>
+      <h2 class="rv" data-i18n="about.t">Bonjour, moi c'est Nathan.</h2>
+      <p class="ink" id="ink" data-i18n="about.text">Depuis 4 ans, je construis des outils qui servent un objectif concret : vendre en ligne, produire un devis en deux minutes, automatiser une tâche qui prend des heures chaque semaine. J'ai fait mes armes chez Allo Training et PEHE BRAINY TECH, et je poursuis un cursus de génie logiciel à l'ISP. J'utilise les agents IA au quotidien, ce qui me permet de livrer plus vite sans rien céder sur la qualité.</p>
+      <ul class="promises rv">
+        <li data-i18n="about.p1"><b>Vous parlez au développeur.</b> Pas d'intermédiaire entre votre besoin et le code.</li>
+        <li data-i18n="about.p2"><b>Vous suivez l'avancement.</b> Des points d'étape réguliers et une version de test en ligne.</li>
+        <li data-i18n="about.p3"><b>Tout vous appartient.</b> Le code, les accès et le nom de domaine sont à votre nom.</li>
+      </ul>
+      <div class="about-actions rv">
+        <a class="btn magnetic" href="CV_Nathan.pdf" download data-i18n="about.cv">Télécharger mon CV</a>
+        <a class="btn btn-ghost magnetic" href="#contact" data-i18n="about.talk">Parlons de votre projet</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="section">
+  <h2 class="rv" data-i18n="services.t">Ce que je peux faire pour vous</h2>
+  <p class="lead rv" data-i18n="services.lead">PME, start-up ou grand groupe : je m'adapte à votre taille, à vos outils et à vos délais. Votre besoin n'apparaît pas ici ? Écrivez-moi, on en parle.</p>
+  <div class="services" id="servicesList"></div>
+</section>
+
+<!-- ============ COMPÉTENCES ============ -->
+<section id="skills" class="section">
+  <h2 class="rv" data-i18n="skills.t">Compétences</h2>
+  <p class="lead rv" data-i18n="skills.lead">Les technologies avec lesquelles je livre des produits solides, de l'interface au serveur, du mobile à l'IA, jusqu'à la mise en production.</p>
+  <div class="skills-grid" id="skillsGrid"></div>
+</section>
+
+<!-- ============ PROJETS (défilement horizontal épinglé) ============ -->
+<section id="work" class="pin" data-pin="4">
+  <div class="sticky work-stage">
+    <div class="work-head">
+      <h2 data-i18n="work.t">Projets</h2>
+      <p class="work-lead" data-i18n="work.lead">Des produits en ligne, utilisés chaque jour par des entreprises.</p>
+      <p class="work-count"><b id="workIdx">01</b> / <span id="workTotal">04</span></p>
+    </div>
+    <div class="work-mask"><div class="work-track" id="workTrack"></div></div>
+  </div>
+</section>
+
+<!-- ============ PARCOURS ============ -->
+<section id="path" class="section">
+  <h2 class="rv" data-i18n="path.t">Parcours</h2>
+  <div class="timeline" id="timeline"><div class="tl-line"><i id="tlFill"></i></div></div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="section">
+  <div class="contact-grid">
+    <div>
+      <h2 class="rv" data-i18n="contact.t">Parlons de votre projet</h2>
+      <p class="rv" data-i18n="contact.text">Un site à créer, une application à lancer, une tâche à automatiser ? Décrivez votre besoin en quelques lignes. Je reviens vers vous avec des questions précises et une première estimation.</p>
+      <ul class="contact-list">
+        <li class="rv"><a href="mailto:nathan.pichele8456@gmail.com" class="link-big">nathan.pichele8456@gmail.com</a></li>
+        <li class="rv"><a href="tel:+237657518434" class="link-big">+237 657 51 84 34</a></li>
+      </ul>
+      <div class="socials rv">
+        <a class="btn btn-ghost btn-sm magnetic" href="https://wa.me/237657518434" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn btn-ghost btn-sm magnetic" href="https://github.com/Nathan8Dev8" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-ghost btn-sm magnetic" href="https://www.linkedin.com/in/nathan-pichele/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost btn-sm magnetic" href="CV_Nathan.pdf" download>CV (PDF)</a>
+      </div>
+    </div>
+    <form class="form glass rv" id="form">
+      <label><span data-i18n="form.name">Nom</span><input name="name" required autocomplete="name"></label>
+      <label><span data-i18n="form.email">E-mail</span><input name="email" type="email" required autocomplete="email"></label>
+      <label><span data-i18n="form.subject">Sujet</span><input name="subject"></label>
+      <label><span data-i18n="form.msg">Message</span><textarea name="msg" rows="5" required></textarea></label>
+      <button class="btn btn-big magnetic" type="submit" data-boom="big"><span data-i18n="form.send">Envoyer ma demande</span></button>
+      <p class="form-note" data-i18n="form.note">Le bouton ouvre votre messagerie avec le message prérempli.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p class="giant" aria-label="Nathan Pichele"></p>
+  <div class="foot-row">
+    <span>© <span id="year"></span> Nathan Pichele</span>
+    <span data-i18n="foot.made">Conçu et codé à Douala.</span>
+    <a href="#hero" class="magnetic" data-i18n="foot.top">Retour en haut ↑</a>
+  </div>
+  <p class="credit">Modèle 3D « <a href="https://sketchfab.com/3d-models/laptop-7d870e900889481395b4a575b9fa8c3e" target="_blank" rel="noopener">Laptop</a> » par <a href="https://sketchfab.com/Aullwen" target="_blank" rel="noopener">Aullwen</a>, licence <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</p>
+</footer>
+
+<script type="importmap">{"imports":{"three":"./assets/vendor/three.module.js"}}</script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
