@@ -104,7 +104,7 @@ const PATH = [
 
 /* ================= TRADUCTION (le français est lu dans le HTML) ================= */
 const EN = {
-  'nav.about': 'About', 'nav.services': 'Services', 'nav.skills': 'Skills', 'nav.work': 'Work', 'nav.path': 'Background', 'nav.cta': 'Contact me',
+  'nav.about': 'About', 'nav.contact': 'Contact', 'work.swipe': 'Swipe to see more →', 'nav.services': 'Services', 'nav.skills': 'Skills', 'nav.work': 'Work', 'nav.path': 'Background', 'nav.cta': 'Contact me',
   'hero.kicker': 'Fullstack developer in Douala, Cameroon',
   'hero.sub': 'I build the websites, apps and AI agents that save businesses time and win them customers. From the first meeting to launch, you deal with one person.',
   'hero.cta1': "Let's discuss your project", 'hero.cta2': 'See my work',
@@ -140,6 +140,7 @@ function setLang(l) {
   $$('[data-i18n]').forEach(el => { const v = dict[el.dataset.i18n]; if (v) el.innerHTML = v; });
   renderServices(); renderSkills(); renderProjects(); renderPath();
   revealObserve();
+  requestAnimationFrame(() => { updWork?.(); updSkills?.(); });
 }
 $('#lang').addEventListener('click', () => setLang(lang === 'fr' ? 'en' : 'fr'));
 
@@ -207,7 +208,7 @@ const io = new IntersectionObserver(es => es.forEach(e => {
   e.target.classList.add('in'); io.unobserve(e.target);
   $$('[data-count]', e.target).forEach(countUp);
   if (e.target.matches('[data-count]')) countUp(e.target);
-}), { threshold: .15, rootMargin: '0px 0px -8% 0px' });
+}), { threshold: .02, rootMargin: '0px 0px -8% 0px' });
 function revealObserve() { $$('.rv:not(.in), .giant:not(.in)').forEach(el => io.observe(el)); }
 function countUp(el) {
   const n = +el.dataset.count, t0 = performance.now();
@@ -431,9 +432,41 @@ document.addEventListener('click', e => {
 
 // Lien actif dans le menu
 const navIO = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting) $$('#top nav a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+  if (e.isIntersecting) $$('#top nav a, #mmenu nav a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
 }), { rootMargin: '-45% 0px -45% 0px' });
 $$('main > section').forEach(s => navIO.observe(s));
+
+/* ================= MENU MOBILE ================= */
+const burger = $('#burger'), mmenu = $('#mmenu');
+function setMenu(open) {
+  document.body.classList.toggle('menu-open', open);
+  burger.setAttribute('aria-expanded', open);
+  burger.setAttribute('aria-label', open ? (lang === 'en' ? 'Close menu' : 'Fermer le menu') : (lang === 'en' ? 'Open menu' : 'Ouvrir le menu'));
+  mmenu.inert = !open; mmenu.setAttribute('aria-hidden', !open);
+}
+burger.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+mmenu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+addEventListener('resize', () => { if (!isMobile()) setMenu(false); });
+
+/* ================= CARROUSELS MOBILES : la carte au centre grandit ================= */
+function carousel(el, onIndex) {
+  const update = () => {
+    if (!isMobile()) return;
+    const c = el.scrollLeft + el.clientWidth / 2; let best = 0, bestD = 1e9;
+    [...el.children].forEach((it, i) => {
+      const d = Math.abs(it.offsetLeft + it.offsetWidth / 2 - c);
+      it.style.setProperty('--k', clamp(1 - d / el.clientWidth * .22, .86, 1));
+      if (d < bestD) { bestD = d; best = i; }
+    });
+    onIndex?.(best);
+  };
+  el.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  return update;
+}
+const updWork = carousel($('#workTrack'), i => ($('#workIdx').textContent = String(i + 1).padStart(2, '0')));
+const updSkills = carousel($('#skillsGrid'));
 
 /* ================= CURSEUR, BOUTONS MAGNÉTIQUES, TILT ================= */
 const cursor = $('#cursor'), dot = $('.c-dot'), ring = $('.c-ring');
@@ -445,6 +478,11 @@ addEventListener('pointermove', e => {
   if (e.pointerType === 'mouse') trail.push({ x: px, y: py, life: 1 });
 }, { passive: true });
 if (finePointer && !reduced) document.body.classList.add('has-cursor');
+// Sur téléphone, l'inclinaison de l'appareil remplace la souris (Android ; iOS demande une autorisation, on s'en passe)
+if (!finePointer && !reduced) addEventListener('deviceorientation', e => {
+  if (e.gamma == null) return;
+  tmx = clamp(e.gamma / 25, -1, 1); tmy = clamp((e.beta - 45) / 25, -1, 1);
+});
 
 function bindInteractive() {
   $$('.btn:not([data-bound])').forEach(b => {
@@ -517,7 +555,7 @@ function drawFx() {
 if (!reduced) addEventListener('pointerdown', e => {
   const btn = e.target.closest?.('.btn, .lang, button, a');
   explode(e.clientX, e.clientY, !!btn && (btn.dataset.boom === 'big' || btn.classList.contains('btn')));
-  if (btn) { btn.classList.remove('boom'); void btn.offsetWidth; btn.classList.add('boom'); }
+  if (btn) { btn.classList.remove('boom'); void btn.offsetWidth; btn.classList.add('boom'); if (!finePointer) navigator.vibrate?.(10); }
 });
 
 /* ================= FORMULAIRE → messagerie ================= */

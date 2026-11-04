@@ -37,8 +37,25 @@
     <a href="#path" data-i18n="nav.path">Parcours</a>
   </nav>
   <button class="lang" id="lang" aria-label="Changer de langue / Switch language"><span>FR</span><span>EN</span></button>
-  <a href="#contact" class="btn btn-sm magnetic" data-i18n="nav.cta">Me contacter</a>
+  <a href="#contact" class="btn btn-sm magnetic head-cta" data-i18n="nav.cta">Me contacter</a>
+  <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mmenu"><i></i><i></i></button>
 </header>
+
+<!-- Menu mobile -->
+<div class="mmenu" id="mmenu" aria-hidden="true" inert>
+  <nav>
+    <a href="#about" data-i18n="nav.about">À propos</a>
+    <a href="#services" data-i18n="nav.services">Services</a>
+    <a href="#skills" data-i18n="nav.skills">Compétences</a>
+    <a href="#work" data-i18n="nav.work">Projets</a>
+    <a href="#path" data-i18n="nav.path">Parcours</a>
+    <a href="#contact" data-i18n="nav.contact">Contact</a>
+  </nav>
+  <div class="mmenu-foot">
+    <a href="mailto:nathan.pichele8456@gmail.com">nathan.pichele8456@gmail.com</a>
+    <a href="https://wa.me/237657518434" target="_blank" rel="noopener">WhatsApp · +237 657 51 84 34</a>
+  </div>
+</div>
 
 <main>
 
@@ -149,6 +166,7 @@
 <section id="skills" class="section">
   <h2 class="rv" data-i18n="skills.t">Compétences</h2>
   <p class="lead rv" data-i18n="skills.lead">Les technologies avec lesquelles je livre des produits solides, de l'interface au serveur, du mobile à l'IA, jusqu'à la mise en production.</p>
+  <p class="swipe skills-swipe" data-i18n="work.swipe">Glissez pour voir la suite →</p>
   <div class="skills-grid" id="skillsGrid"></div>
 </section>
 
@@ -158,7 +176,7 @@
     <div class="work-head">
       <h2 data-i18n="work.t">Projets</h2>
       <p class="work-lead" data-i18n="work.lead">Des produits en ligne, utilisés chaque jour par des entreprises.</p>
-      <p class="work-count"><b id="workIdx">01</b> / <span id="workTotal">04</span></p>
+      <p class="work-count"><b id="workIdx">01</b> / <span id="workTotal">04</span><span class="swipe" data-i18n="work.swipe">Glissez pour voir la suite →</span></p>
     </div>
     <div class="work-mask"><div class="work-track" id="workTrack"></div></div>
   </div>
