@@ -24,7 +24,7 @@ Chaque texte est écrit `[français, anglais]`.
 
 ## Mettre en ligne
 Glisser le dossier sur https://app.netlify.com/drop, ou `npx vercel` dans le dossier.
-Fichiers nécessaires : `index.html`, `styles.css`, `app.js`, `assets/`, `CV_Nathan.pdf`.
+Fichiers nécessaires : `index.html`, `styles.css`, `app.js`, `assets/`, `CV_nathan.pdf`.
 
 ## Crédits
 Modèle 3D « Laptop » par Aullwen (CC BY 4.0), crédité en pied de page : ne pas retirer.
